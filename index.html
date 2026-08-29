@@ -1,4 +1,4 @@
-<html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -34,7 +34,8 @@
 
         .header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
+            word-break: keep-all;
         }
 
         .session-badge {
@@ -45,7 +46,7 @@
             border-radius: 20px;
             font-size: 14px;
             font-weight: 600;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             box-shadow: 0 4px 10px rgba(79, 70, 229, 0.2);
         }
 
@@ -54,6 +55,9 @@
             color: #1f2937;
             margin: 0;
             font-weight: 700;
+            line-height: 1.4;
+            word-break: keep-all;
+            overflow-wrap: break-word;
         }
 
         .name-section {
@@ -134,6 +138,7 @@
 
         .input-item input {
             width: 100%;
+            aspect-ratio: 1 / 1;
             padding: 10px;
             border: 1px solid #d1d5db;
             border-radius: 8px;
