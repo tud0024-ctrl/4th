@@ -100,35 +100,77 @@ function resetCard(){
  }
 }
 function saveCard(){
- const val=id=>document.getElementById(id).value||"________";
- const esc=s=>s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
- const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900">
- <rect width="1600" height="900" fill="#eef2f5"/>
- <rect x="55" y="45" width="1490" height="810" rx="32" fill="white" stroke="#dfe4e8"/>
- <text x="800" y="105" text-anchor="middle" font-family="Arial,Malgun Gothic,sans-serif" font-size="24" font-weight="700" fill="#58758a">4차시 · 나의 가치관 탐색하고 이해하기</text>
- <text x="800" y="160" text-anchor="middle" font-family="Arial,Malgun Gothic,sans-serif" font-size="38" font-weight="800" fill="#26323b">나의 강점 · 가치관 카드</text>
- <text x="120" y="235" font-family="Arial,Malgun Gothic,sans-serif" font-size="25" font-weight="800">나의 강점 3가지</text>
- <text x="120" y="295" font-family="Arial,Malgun Gothic,sans-serif" font-size="25">① ${esc(val("s1"))}</text>
- <text x="120" y="350" font-family="Arial,Malgun Gothic,sans-serif" font-size="25">② ${esc(val("s2"))}</text>
- <text x="120" y="405" font-family="Arial,Malgun Gothic,sans-serif" font-size="25">③ ${esc(val("s3"))}</text>
- <line x1="535" y1="210" x2="535" y2="500" stroke="#e5e8ea"/>
- <text x="590" y="235" font-family="Arial,Malgun Gothic,sans-serif" font-size="25" font-weight="800">나의 가치관 3가지</text>
- <text x="590" y="295" font-family="Arial,Malgun Gothic,sans-serif" font-size="25">① ${esc(val("v1"))}</text>
- <text x="590" y="350" font-family="Arial,Malgun Gothic,sans-serif" font-size="25">② ${esc(val("v2"))}</text>
- <text x="590" y="405" font-family="Arial,Malgun Gothic,sans-serif" font-size="25">③ ${esc(val("v3"))}</text>
- <rect x="100" y="465" width="1400" height="300" rx="25" fill="#f6fafc" stroke="#d9e5eb"/>
- <text x="800" y="525" text-anchor="middle" font-family="Arial,Malgun Gothic,sans-serif" font-size="25" font-weight="800">나의 진로 주제</text>
- <text x="800" y="600" text-anchor="middle" font-family="Arial,Malgun Gothic,sans-serif" font-size="31" font-weight="700">나는 ${esc(val("trait"))} 사람이라서</text>
- <text x="800" y="665" text-anchor="middle" font-family="Arial,Malgun Gothic,sans-serif" font-size="31" font-weight="700">${esc(val("field"))} 계열에 관심이 간다.</text>
- <text x="800" y="815" text-anchor="middle" font-family="Arial,Malgun Gothic,sans-serif" font-size="16" fill="#9aa2a8">나의 진로는 내가 생각하고 선택합니다.</text>
- </svg>`;
- const blob=new Blob([svg],{type:"image/svg+xml"}),url=URL.createObjectURL(blob),img=new Image();
- img.onload=()=>{
-  const c=document.createElement("canvas");c.width=1600;c.height=900;
-  c.getContext("2d").drawImage(img,0,0);URL.revokeObjectURL(url);
-  const a=document.createElement("a");a.download="나의_강점_가치관_진로주제.png";a.href=c.toDataURL("image/png");a.click();
- };
- img.src=url;
+  const page=document.querySelector(".page");
+  const rect=page.getBoundingClientRect();
+  const scale=2;
+  const w=800, h=800;
+
+  const esc=s=>(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+  const v=id=>esc(document.getElementById(id).value||"");
+
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 800 800">
+  <rect width="800" height="800" fill="#eef2f5"/>
+  <rect x="20" y="20" width="760" height="760" rx="20" fill="#eef2f5"/>
+
+  <rect x="42" y="34" width="716" height="142" rx="16" fill="#eef2f5"/>
+  <rect x="55" y="43" width="170" height="28" rx="14" fill="#e7f0f5"/>
+  <text x="140" y="62" text-anchor="middle" font-family="Arial,Malgun Gothic,sans-serif" font-size="11" font-weight="700" fill="#58758a">4차시 · 가치관 탐색</text>
+  <text x="55" y="108" font-family="Arial,Malgun Gothic,sans-serif" font-size="27" font-weight="800" fill="#26323b">나의 강점 · 가치관 카드</text>
+  <text x="55" y="133" font-family="Arial,Malgun Gothic,sans-serif" font-size="11" fill="#707a82">나를 잘 보여주는 단어를 직접 입력해 보세요.</text>
+
+  <rect x="42" y="175" width="344" height="210" rx="16" fill="white" stroke="#dfe4e8"/>
+  <text x="62" y="207" font-family="Arial,Malgun Gothic,sans-serif" font-size="17" font-weight="800" fill="#26323b">① 나의 강점 3가지</text>
+  <text x="62" y="228" font-family="Arial,Malgun Gothic,sans-serif" font-size="9" fill="#818b92">내가 잘하거나 다른 사람이 자주 말해주는 장점</text>
+  <text x="68" y="270" font-family="Arial,Malgun Gothic,sans-serif" font-size="14" fill="#69747c">①</text>
+  <rect x="88" y="252" width="275" height="28" rx="7" fill="#fafcfd" stroke="#d7dde1"/>
+  <text x="101" y="271" font-family="Arial,Malgun Gothic,sans-serif" font-size="12" fill="#26323b">${v("s1")}</text>
+  <text x="68" y="315" font-family="Arial,Malgun Gothic,sans-serif" font-size="14" fill="#69747c">②</text>
+  <rect x="88" y="297" width="275" height="28" rx="7" fill="#fafcfd" stroke="#d7dde1"/>
+  <text x="101" y="316" font-family="Arial,Malgun Gothic,sans-serif" font-size="12" fill="#26323b">${v("s2")}</text>
+  <text x="68" y="360" font-family="Arial,Malgun Gothic,sans-serif" font-size="14" fill="#69747c">③</text>
+  <rect x="88" y="342" width="275" height="28" rx="7" fill="#fafcfd" stroke="#d7dde1"/>
+  <text x="101" y="361" font-family="Arial,Malgun Gothic,sans-serif" font-size="12" fill="#26323b">${v("s3")}</text>
+
+  <rect x="414" y="175" width="344" height="210" rx="16" fill="white" stroke="#dfe4e8"/>
+  <text x="434" y="207" font-family="Arial,Malgun Gothic,sans-serif" font-size="17" font-weight="800" fill="#26323b">② 나의 가치관 3가지</text>
+  <text x="434" y="228" font-family="Arial,Malgun Gothic,sans-serif" font-size="9" fill="#818b92">진로나 일을 선택할 때 중요하게 생각하는 것</text>
+  <text x="440" y="270" font-family="Arial,Malgun Gothic,sans-serif" font-size="14" fill="#69747c">①</text>
+  <rect x="460" y="252" width="275" height="28" rx="7" fill="#fafcfd" stroke="#d7dde1"/>
+  <text x="473" y="271" font-family="Arial,Malgun Gothic,sans-serif" font-size="12" fill="#26323b">${v("v1")}</text>
+  <text x="440" y="315" font-family="Arial,Malgun Gothic,sans-serif" font-size="14" fill="#69747c">②</text>
+  <rect x="460" y="297" width="275" height="28" rx="7" fill="#fafcfd" stroke="#d7dde1"/>
+  <text x="473" y="316" font-family="Arial,Malgun Gothic,sans-serif" font-size="12" fill="#26323b">${v("v2")}</text>
+  <text x="440" y="360" font-family="Arial,Malgun Gothic,sans-serif" font-size="14" fill="#69747c">③</text>
+  <rect x="460" y="342" width="275" height="28" rx="7" fill="#fafcfd" stroke="#d7dde1"/>
+  <text x="473" y="361" font-family="Arial,Malgun Gothic,sans-serif" font-size="12" fill="#26323b">${v("v3")}</text>
+
+  <rect x="42" y="400" width="716" height="310" rx="16" fill="white" stroke="#dfe4e8"/>
+  <text x="62" y="433" font-family="Arial,Malgun Gothic,sans-serif" font-size="17" font-weight="800" fill="#26323b">③ 나의 진로 주제 한 문장</text>
+  <rect x="62" y="455" width="676" height="205" rx="13" fill="#f6fafc" stroke="#d9e5eb"/>
+  <text x="400" y="492" text-anchor="middle" font-family="Arial,Malgun Gothic,sans-serif" font-size="13" font-weight="800" fill="#58758a">나의 진로 주제</text>
+  <text x="400" y="548" text-anchor="middle" font-family="Arial,Malgun Gothic,sans-serif" font-size="22" font-weight="700" fill="#26323b">나는 ${v("trait")} 사람이라서</text>
+  <text x="400" y="598" text-anchor="middle" font-family="Arial,Malgun Gothic,sans-serif" font-size="22" font-weight="700" fill="#26323b">${v("field")} 계열에 관심이 간다.</text>
+  <text x="400" y="685" text-anchor="middle" font-family="Arial,Malgun Gothic,sans-serif" font-size="10" fill="#9aa2a8">나의 진로는 내가 생각하고 선택합니다.</text>
+  </svg>`;
+
+  const blob=new Blob([svg],{type:"image/svg+xml;charset=utf-8"});
+  const url=URL.createObjectURL(blob);
+  const img=new Image();
+  img.onload=()=>{
+    const canvas=document.createElement("canvas");
+    canvas.width=w*scale; canvas.height=h*scale;
+    const ctx=canvas.getContext("2d");
+    ctx.drawImage(img,0,0,w*scale,h*scale);
+    URL.revokeObjectURL(url);
+    canvas.toBlob(blob=>{
+      const a=document.createElement("a");
+      a.download="나의진로주제.jpg";
+      a.href=URL.createObjectURL(blob);
+      a.click();
+      setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+    },"image/jpeg",0.82);
+  };
+  img.src=url;
 }
 </script>
 </body>
