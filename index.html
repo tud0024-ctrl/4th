@@ -1,1 +1,314 @@
+<html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4차시 | 나의 가치관 탐색하고 이해하기</title>
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+        }
 
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            margin: 0;
+            padding: 30px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 650px;
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            border: 4px solid #e8f0fe;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .session-badge {
+            display: inline-block;
+            background-color: #4f46e5;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 10px rgba(79, 70, 229, 0.2);
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #1f2937;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .name-section {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-bottom: 25px;
+            gap: 10px;
+        }
+
+        .name-section label {
+            font-weight: 600;
+            color: #4b5563;
+            font-size: 15px;
+        }
+
+        .name-section input {
+            width: 130px;
+            padding: 8px 12px;
+            border: 2px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 15px;
+            text-align: center;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .name-section input:focus {
+            border-color: #4f46e5;
+        }
+
+        .section-box {
+            background: #f9fafb;
+            border: 2px dashed #d1d5db;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 25px;
+            transition: all 0.2s;
+        }
+
+        .section-box:hover {
+            border-color: #9ca3af;
+            background: #fdfdfd;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #374151;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title span {
+            color: #4f46e5;
+            font-size: 18px;
+        }
+
+        .inputs-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .input-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .input-item span {
+            font-size: 12px;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .input-item input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+            text-align: center;
+            background: #ffffff;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .input-item input:focus {
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .career-sentence-box {
+            background: #eef2ff;
+            border: 2px solid #c7d2fe;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .career-sentence-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+            color: #1e1b4b;
+            font-weight: 600;
+            line-height: 1.8;
+            justify-content: center;
+        }
+
+        .career-sentence-content input {
+            padding: 6px 12px;
+            border: 2px solid #818cf8;
+            border-radius: 8px;
+            font-size: 15px;
+            background: #ffffff;
+            outline: none;
+            text-align: center;
+        }
+
+        .career-sentence-content input.blank-1 {
+            flex: 1;
+            min-width: 140px;
+        }
+
+        .career-sentence-content input.blank-2 {
+            flex: 1;
+            min-width: 140px;
+        }
+
+        .career-sentence-content input:focus {
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+        }
+
+        .btn-container {
+            text-align: center;
+        }
+
+        .print-btn {
+            background: #4f46e5;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+            transition: all 0.2s;
+        }
+
+        .print-btn:hover {
+            background: #4338ca;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
+        }
+
+        .print-btn:active {
+            transform: translateY(0);
+        }
+
+        /* 캡처/인쇄 최적화 스타일 */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                border: 2px solid #333;
+                max-width: 100%;
+                padding: 20px;
+            }
+            .print-btn {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="captureArea">
+        <div class="header">
+            <div class="session-badge">4차시 진로 교육</div>
+            <h1>나의 가치관 탐색하고 이해하기</h1>
+        </div>
+
+        <div class="name-section">
+            <label for="studentName">작성자:</label>
+            <input type="text" id="studentName" placeholder="이름 입력">
+        </div>
+
+        <div class="section-box">
+            <div class="section-title">
+                <span>①</span> 나의 강점 3가지 쓰기
+            </div>
+            <div class="inputs-grid">
+                <div class="input-item">
+                    <span>강점 1</span>
+                    <input type="text" placeholder="예: 끈기">
+                </div>
+                <div class="input-item">
+                    <span>강점 2</span>
+                    <input type="text" placeholder="예: 공감능력">
+                </div>
+                <div class="input-item">
+                    <span>강점 3</span>
+                    <input type="text" placeholder="예: 창의성">
+                </div>
+            </div>
+        </div>
+
+        <div class="section-box">
+            <div class="section-title">
+                <span>②</span> 나의 가치관 3가지 쓰기
+            </div>
+            <div class="inputs-grid">
+                <div class="input-item">
+                    <span>가치관 1</span>
+                    <input type="text" placeholder="예: 성장">
+                </div>
+                <div class="input-item">
+                    <span>가치관 2</span>
+                    <input type="text" placeholder="예: 도전">
+                </div>
+                <div class="input-item">
+                    <span>가치관 3</span>
+                    <input type="text" placeholder="예: 협동">
+                </div>
+            </div>
+        </div>
+
+        <div class="career-sentence-box">
+            <div class="section-title" style="margin-bottom: 10px; color: #312e81;">
+                <span>③</span> 진로 주제 한 문장 완성하기
+            </div>
+            <div class="career-sentence-content">
+                <span>나는</span>
+                <input type="text" class="blank-1" placeholder="예: 끈기 있고 성장하는">
+                <span>한 사람이라서</span>
+                <input type="text" class="blank-2" placeholder="예: IT 및 교육">
+                <span>계열에 관심이 간다.</span>
+            </div>
+        </div>
+
+        <div class="btn-container">
+            <button class="print-btn" onclick="window.print()">화면 인쇄 / PDF로 저장하기</button>
+        </div>
+    </div>
+
+</body>
+</html>
